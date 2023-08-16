@@ -1,0 +1,41 @@
+#Rock, paper, scissors game
+
+import tkinter as tk
+from tkinter import messagebox
+import random
+
+def play_game(player_choice):
+    choices = ['Rock', 'Paper', 'Scissors']
+    computer_choice = random.choice(choices)
+
+    if player_choice == computer_choice:
+        result = "It's a Tie!"
+    elif (player_choice == 'Rock' and computer_choice == 'Scissors') or \
+         (player_choice == 'Paper' and computer_choice == 'Rock') or \
+         (player_choice == 'Scissors' and computer_choice == 'Paper'):
+        result = "You Win!"
+    else:
+        result = "You Lose!"
+        
+    result_label.config(text=f"You chose: {player_choice}\nComputer chose: {computer_choice}\n{result}")
+
+root = tk.Tk()
+root.title("Rock, Paper, Scissors")
+root.geometry("300x300")
+
+game_frame = tk.Frame(root, bg="lightgray")
+game_frame.pack(pady=30)
+
+rock_button = tk.Button(game_frame, text="Rock", bg="red", fg="white", padx=10, pady=5, command=lambda: play_game('Rock'))
+rock_button.grid(row=0, column=0, padx=5, pady=5)
+
+paper_button = tk.Button(game_frame, text="Paper", bg="blue", fg="white", padx=10, pady=5, command=lambda: play_game('Paper'))
+paper_button.grid(row=0, column=1, padx=5, pady=5)
+
+scissors_button = tk.Button(game_frame, text="Scissors", bg="green", fg="white", padx=10, pady=5, command=lambda: play_game('Scissors'))
+scissors_button.grid(row=0, column=2, padx=5, pady=5)
+
+result_label = tk.Label(root, text="", bg="lightgray", font=("Arial", 12, "bold"))
+result_label.pack(pady=20)
+
+root.mainloop()
